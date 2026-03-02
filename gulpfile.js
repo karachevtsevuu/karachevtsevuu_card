@@ -1,122 +1,134 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
-var header = require('gulp-header');
-var cleanCSS = require('gulp-clean-css');
-var rename = require("gulp-rename");
-var uglify = require('gulp-uglify');
-var autoprefixer = require('gulp-autoprefixer');
-var pkg = require('./package.json');
-var browserSync = require('browser-sync').create();
+const { src, dest, watch, series, parallel } = require('gulp');
+const sass = require('gulp-sass')(require('sass'));
+const postcss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const cleanCSS = require('gulp-clean-css');
+const terser = require('gulp-terser');
+const rename = require('gulp-rename');
+const browserSync = require('browser-sync').create();
 
-// Set the banner content
-var banner = ['/*!\n',
-  ' * Start Bootstrap - <%= pkg.title %> v<%= pkg.version %> (<%= pkg.homepage %>)\n',
-  ' * Copyright 2013-' + (new Date()).getFullYear(), ' <%= pkg.author %>\n',
-  ' * Licensed under <%= pkg.license %> (https://github.com/BlackrockDigital/<%= pkg.name %>/blob/master/LICENSE)\n',
-  ' */\n',
-  '\n'
-].join('');
+// Пути
+const paths = {
+    scssEntry: 'scss/resume.scss',
+    js: 'js/**/*.js',
+    html: '*.html',
+    img: 'img/**/*',
 
-// Copy third party libraries from /node_modules into /vendor
-gulp.task('vendor', function() {
+    bootstrap: {
+        css: 'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        js: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js'
+    },
+    fontawesome: {
+        css: 'node_modules/@fortawesome/fontawesome-free/css/all.min.css',
+        webfonts: 'node_modules/@fortawesome/fontawesome-free/webfonts/*'
+    },
+    jquery: {
+        js: 'node_modules/jquery/dist/jquery.min.js'
+    },
 
-  // Bootstrap
-  gulp.src([
-      './node_modules/bootstrap/dist/**/*',
-      '!./node_modules/bootstrap/dist/css/bootstrap-grid*',
-      '!./node_modules/bootstrap/dist/css/bootstrap-reboot*'
-    ])
-    .pipe(gulp.dest('./vendor/bootstrap'))
-
-  // Font Awesome
-  gulp.src([
-      './node_modules/@fortawesome/**/*',
-    ])
-    .pipe(gulp.dest('./vendor'))
-
-  // jQuery
-  gulp.src([
-      './node_modules/jquery/dist/*',
-      '!./node_modules/jquery/dist/core.js'
-    ])
-    .pipe(gulp.dest('./vendor/jquery'))
-
-  // jQuery Easing
-  gulp.src([
-      './node_modules/jquery.easing/*.js'
-    ])
-    .pipe(gulp.dest('./vendor/jquery-easing'))
-
-});
-
-// Compile SCSS
-gulp.task('css:compile', function() {
-  return gulp.src('./scss/**/*.scss')
-    .pipe(sass.sync({
-      outputStyle: 'expanded'
-    }).on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
-    }))
-    .pipe(header(banner, {
-      pkg: pkg
-    }))
-    .pipe(gulp.dest('./css'))
-});
-
-// Minify CSS
-gulp.task('css:minify', ['css:compile'], function() {
-  return gulp.src([
-      './css/*.css',
-      '!./css/*.min.css'
-    ])
-    .pipe(cleanCSS())
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(gulp.dest('./css'))
-    .pipe(browserSync.stream());
-});
-
-// CSS
-gulp.task('css', ['css:compile', 'css:minify']);
-
-// Minify JavaScript
-gulp.task('js:minify', function() {
-  return gulp.src([
-      './js/*.js',
-      '!./js/*.min.js'
-    ])
-    .pipe(uglify())
-    .pipe(rename({
-      suffix: '.min'
-    }))
-    .pipe(header(banner, {
-      pkg: pkg
-    }))
-    .pipe(gulp.dest('./js'))
-    .pipe(browserSync.stream());
-});
-
-// JS
-gulp.task('js', ['js:minify']);
-
-// Default task
-gulp.task('default', ['css', 'js', 'vendor']);
-
-// Configure the browserSync task
-gulp.task('browserSync', function() {
-  browserSync.init({
-    server: {
-      baseDir: "./"
+    dist: {
+        root: 'dist',
+        css: 'dist/css',
+        js: 'dist/js',
+        img: 'dist/img',
+        vendor: 'dist/vendor'
     }
-  });
-});
+};
 
-// Dev task
-gulp.task('dev', ['css', 'js', 'browserSync'], function() {
-  gulp.watch('./scss/*.scss', ['css']);
-  gulp.watch('./js/*.js', ['js']);
-  gulp.watch('./*.html', browserSync.reload);
-});
+// Стили (основные)
+function styles() {
+    return src(paths.scssEntry)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(postcss([ autoprefixer() ]))
+        .pipe(cleanCSS())
+        .pipe(rename('resume.css'))
+        .pipe(dest(paths.dist.css))
+        .pipe(browserSync.stream()); // нужно для обновления CSS в браузере
+}
+
+// Bootstrap
+function bootstrapCopy() {
+    src(paths.bootstrap.css)
+        .pipe(dest(`${paths.dist.vendor}/bootstrap/css/`));
+    return src(paths.bootstrap.js)
+        .pipe(dest(`${paths.dist.vendor}/bootstrap/js/`));
+    // browserSync.stream() убран – не нужен для статики
+}
+
+// FontAwesome
+function fontawesomeCopy() {
+    src(paths.fontawesome.css)
+        .pipe(dest(`${paths.dist.vendor}/fontawesome-free/css/`));
+    return src(paths.fontawesome.webfonts)
+        .pipe(dest(`${paths.dist.vendor}/fontawesome-free/webfonts/`));
+    // browserSync.stream() убран
+}
+
+// jQuery
+function jqueryCopy() {
+    return src(paths.jquery.js)
+        .pipe(dest(`${paths.dist.vendor}/jquery/`));
+}
+
+// Пользовательские скрипты
+function scripts() {
+    return src(paths.js)
+        .pipe(terser())
+        .pipe(rename({ suffix: '.min' }))
+        .pipe(dest(paths.dist.js))
+        .pipe(browserSync.stream());
+}
+
+// HTML
+function html() {
+    return src(paths.html)
+        .pipe(dest(paths.dist.root))
+        .pipe(browserSync.stream());
+}
+
+// Картинки
+function images() {
+    return src(paths.img)
+        .pipe(dest(paths.dist.img));
+    // browserSync.stream() убран
+}
+
+// Сервер
+function serve() {
+    browserSync.init({
+        server: { baseDir: paths.dist.root },
+        port: 3000,
+        open: true,
+        notify: false
+    });
+
+    watch('scss/**/*.scss', styles);
+    watch(paths.js, scripts);
+    watch(paths.html, html);
+    watch(paths.img, images);
+    // Если вы меняете vendor-файлы вручную – добавьте вотчер, но обычно не нужно
+}
+
+// Сборка
+const build = parallel(
+    styles,
+    scripts,
+    html,
+    images,
+    bootstrapCopy,
+    fontawesomeCopy,
+    jqueryCopy
+);
+
+const dev = series(build, serve);
+
+exports.styles = styles;
+exports.scripts = scripts;
+exports.html = html;
+exports.images = images;
+exports.bootstrap = bootstrapCopy;
+exports.fontawesome = fontawesomeCopy;
+exports.jquery = jqueryCopy;
+exports.build = build;
+exports.dev = dev;
+exports.default = dev;
