@@ -1,0 +1,5 @@
+node_modules
+vendor
+css/resume.min.css
+package-lock.json
+js/resume.min.js
