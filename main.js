@@ -30,18 +30,6 @@ function setupCopyButton() {
     }
 }
 
-// Раскрытие текста "Читать далее"
-function setupReadMore() {
-    const btn = document.getElementById('toggleAbout');
-    const textBlock = document.getElementById('aboutMore');
-    if (btn && textBlock) {
-        btn.addEventListener('click', () => {
-            textBlock.classList.toggle('expanded');
-            btn.textContent = textBlock.classList.contains('expanded') ? 'Свернуть' : 'Читать далее';
-        });
-    }
-}
-
 // Навигация (подсветка активного пункта)
 function setupNavHighlight() {
     const sections = document.querySelectorAll('.section');
@@ -127,7 +115,7 @@ function setupMobileMenu() {
 document.addEventListener('DOMContentLoaded', () => {
     calculateExperience();
     setupCopyButton();
-    setupReadMore();
+    // setupReadMore(); // удалено, так как кнопка больше не нужна
     setupNavHighlight();
     setupSmoothScroll();
     setupScrollTop();
