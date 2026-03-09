@@ -181,11 +181,7 @@ h3 {
     object-fit: cover;
     border: 4px solid var(--primary);
     box-shadow: 0 10px 20px rgba(37,99,235,0.3);
-    transition: var(--transition);
-}
-
-.profile-img:hover {
-    transform: scale(1.05) rotate(5deg);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
 .subtitle {
@@ -301,11 +297,6 @@ h3 {
     cursor: default;
 }
 
-.tools i:hover {
-    color: var(--primary);
-    transform: scale(1.2);
-}
-
 /* Опыт работы - карточки */
 .timeline {
     display: flex;
@@ -332,11 +323,6 @@ h3 {
     height: 100%;
     background: linear-gradient(45deg, transparent, rgba(37,99,235,0.05));
     pointer-events: none;
-}
-
-.job-card:hover {
-    transform: translateX(10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .job-header {
@@ -420,7 +406,29 @@ h3 {
     transform: translateY(0);
 }
 
-/* Адаптивность */
+/* Десктопные hover-эффекты (только при ширине > 768px) */
+@media (min-width: 769px) {
+    .profile-img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 30px rgba(37,99,235,0.4);
+        border-color: var(--primary-dark);
+    }
+
+    .job-card:hover {
+        transform: translateX(10px) scale(1.01);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+
+    .tools i:hover {
+        transform: scale(1.2) rotate(5deg);
+    }
+
+    .links a:hover {
+        box-shadow: 0 5px 15px rgba(37,99,235,0.3);
+    }
+}
+
+/* Адаптивность для мобильных */
 @media (max-width: 768px) {
     .nav-menu {
         position: fixed;
