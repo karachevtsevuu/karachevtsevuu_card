@@ -8,26 +8,40 @@ function calculateExperience() {
     document.getElementById('experience-year').textContent = experience;
 }
 
-// Копирование email
+// Копирование email с визуальным откликом (иконка меняется на галочку на 2 сек)
 function setupCopyButton() {
-    const copyBtn = document.querySelector('.copy-btn');
-    if (copyBtn) {
-        copyBtn.addEventListener('click', () => {
-            const email = 'karachevtsevuu@gmail.com';
-            navigator.clipboard.writeText(email).then(() => {
-                alert('Email скопирован!');
-            }).catch(() => {
-                // fallback
-                const textarea = document.createElement('textarea');
-                textarea.value = email;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                alert('Email скопирован!');
-            });
+    const copyBtn = document.getElementById('copyEmailBtn');
+    if (!copyBtn) return;
+
+    copyBtn.addEventListener('click', () => {
+        const email = 'karachevtsevuu@gmail.com';
+        const icon = copyBtn.querySelector('i');
+
+        // Копируем в буфер обмена
+        navigator.clipboard.writeText(email).catch(() => {
+            // fallback для старых браузеров
+            const textarea = document.createElement('textarea');
+            textarea.value = email;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
         });
-    }
+
+        // Меняем иконку на fa-check
+        if (icon) {
+            icon.classList.remove('fa-copy');
+            icon.classList.add('fa-check');
+        }
+
+        // Через 2 секунды возвращаем исходную иконку
+        setTimeout(() => {
+            if (icon) {
+                icon.classList.remove('fa-check');
+                icon.classList.add('fa-copy');
+            }
+        }, 2000);
+    });
 }
 
 // Навигация (подсветка активного пункта)
@@ -115,7 +129,6 @@ function setupMobileMenu() {
 document.addEventListener('DOMContentLoaded', () => {
     calculateExperience();
     setupCopyButton();
-    // setupReadMore(); // удалено, так как кнопка больше не нужна
     setupNavHighlight();
     setupSmoothScroll();
     setupScrollTop();
