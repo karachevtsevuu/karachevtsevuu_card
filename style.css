@@ -1,11 +1,18 @@
+/* ===== ТЕМА "ТЕРМИНАЛ ВВОДА" (ХАКЕРСКАЯ) ===== */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap');
+
 :root {
-    --primary: #2563eb;
-    --primary-dark: #1d4ed8;
-    --secondary: #64748b;
-    --dark: #1e293b;
-    --light: #f8fafc;
-    --gray: #cbd5e1;
-    --transition: all 0.3s ease;
+    --bg: #0c0c0c;
+    --bg-light: #1a1a1a;
+    --text: #33ff33;
+    --text-dim: #00aa00;
+    --text-bright: #88ff88;
+    --border: #33ff33;
+    --accent: #ffff33;
+    --accent-dim: #aaaa00;
+    --cursor: #33ff33;
+    --scanline: rgba(51, 255, 51, 0.05);
+    --font-mono: 'Fira Code', 'Courier New', monospace;
 }
 
 * {
@@ -19,24 +26,67 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    color: var(--dark);
+    font-family: var(--font-mono);
+    background: var(--bg);
+    color: var(--text);
     line-height: 1.6;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    font-size: 16px;
+}
+
+/* Эффект старого CRT-экрана */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(
+            to bottom,
+            rgba(18, 16, 16, 0) 50%,
+            rgba(0, 0, 0, 0.25) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 2;
+    animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 10px; }
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
+    pointer-events: none;
+    z-index: 1;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 /* Навигация */
 .navbar {
-    background: rgba(255,255,255,0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    background: rgba(12, 12, 12, 0.95);
+    backdrop-filter: blur(2px);
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 0 10px var(--text-dim);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -54,8 +104,14 @@ body {
 .nav-brand {
     font-size: 1.5rem;
     font-weight: 700;
-    color: var(--primary);
+    color: var(--text-bright);
     text-decoration: none;
+    letter-spacing: 2px;
+}
+
+.nav-brand::before {
+    content: "> ";
+    color: var(--accent);
 }
 
 .nav-menu {
@@ -66,10 +122,16 @@ body {
 
 .nav-link {
     text-decoration: none;
-    color: var(--dark);
+    color: var(--text);
     font-weight: 500;
-    transition: var(--transition);
+    transition: all 0.3s ease;
     position: relative;
+    letter-spacing: 0.5px;
+}
+
+.nav-link:hover {
+    color: var(--accent);
+    text-shadow: 0 0 5px var(--accent);
 }
 
 .nav-link::after {
@@ -78,9 +140,10 @@ body {
     bottom: -5px;
     left: 0;
     width: 0;
-    height: 2px;
-    background: var(--primary);
-    transition: var(--transition);
+    height: 1px;
+    background: var(--accent);
+    box-shadow: 0 0 5px var(--accent);
+    transition: width 0.3s ease;
 }
 
 .nav-link:hover::after,
@@ -98,10 +161,10 @@ body {
 .toggler-icon {
     display: block;
     width: 25px;
-    height: 3px;
-    background: var(--dark);
+    height: 2px;
+    background: var(--text);
     position: relative;
-    transition: var(--transition);
+    transition: all 0.3s ease;
 }
 
 .toggler-icon::before,
@@ -109,9 +172,9 @@ body {
     content: '';
     position: absolute;
     width: 100%;
-    height: 3px;
-    background: var(--dark);
-    transition: var(--transition);
+    height: 2px;
+    background: var(--text);
+    transition: all 0.3s ease;
 }
 
 .toggler-icon::before { top: -8px; }
@@ -119,23 +182,37 @@ body {
 
 /* Секции */
 .section {
-    background: white;
-    border-radius: 1.5rem;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 20px rgba(51, 255, 51, 0.2), inset 0 0 10px rgba(51, 255, 51, 0.1);
     padding: 2.5rem;
     margin: 3rem 0;
-    box-shadow: 0 20px 40px -15px rgba(0,0,0,0.2);
-    transition: var(--transition);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.section::before {
+    content: ">>>";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--bg-light);
+    padding: 0 10px;
+    color: var(--accent);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
 }
 
 .section:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+    box-shadow: 0 0 30px rgba(51, 255, 51, 0.4), inset 0 0 15px rgba(51, 255, 51, 0.2);
+    border-color: var(--accent);
 }
 
 /* Заголовки */
 h1 {
     font-size: 2.5rem;
     font-weight: 700;
+    letter-spacing: 1px;
 }
 
 h2 {
@@ -143,6 +220,9 @@ h2 {
     margin-bottom: 2rem;
     position: relative;
     display: inline-block;
+    color: var(--text-bright);
+    text-transform: uppercase;
+    letter-spacing: 3px;
 }
 
 h2::after {
@@ -151,18 +231,21 @@ h2::after {
     bottom: -10px;
     left: 0;
     width: 60px;
-    height: 4px;
-    background: var(--primary);
-    border-radius: 2px;
+    height: 2px;
+    background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
 }
 
 h3 {
     font-size: 1.3rem;
     margin-bottom: 0.5rem;
+    color: var(--accent);
+    letter-spacing: 1px;
 }
 
 .text-primary {
-    color: var(--primary);
+    color: var(--accent);
+    text-shadow: 0 0 5px var(--accent);
 }
 
 /* Профиль */
@@ -179,30 +262,35 @@ h3 {
     height: 150px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--primary);
-    box-shadow: 0 10px 20px rgba(37,99,235,0.3);
+    border: 2px solid var(--border);
+    box-shadow: 0 0 20px rgba(51, 255, 51, 0.5);
     transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    filter: grayscale(50%) contrast(120%);
 }
 
 .subtitle {
     font-size: 1.2rem;
-    color: var(--secondary);
+    color: var(--text-dim);
     margin: 0.5rem 0;
 }
 
 .copy-btn {
     background: none;
-    border: none;
-    color: var(--secondary);
+    border: 1px solid var(--border);
+    color: var(--text);
     cursor: pointer;
     font-size: 1rem;
     margin-left: 0.5rem;
-    transition: var(--transition);
+    transition: all 0.3s ease;
+    padding: 2px 6px;
+    border-radius: 0;
 }
 
 .copy-btn:hover {
-    color: var(--primary);
-    transform: scale(1.1);
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--text);
 }
 
 /* Ссылки */
@@ -217,18 +305,21 @@ h3 {
 .links a {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: var(--light);
-    border-radius: 2rem;
+    background: transparent;
+    border: 1px solid var(--border);
     text-decoration: none;
-    color: var(--dark);
-    transition: var(--transition);
-    border: 1px solid var(--gray);
+    color: var(--text);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
 }
 
 .links a:hover {
-    background: var(--primary);
-    color: white;
-    border-color: var(--primary);
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--text);
     transform: translateY(-2px);
 }
 
@@ -244,8 +335,10 @@ h3 {
 }
 
 .skill-category h3 {
-    color: var(--primary);
+    color: var(--accent);
     margin-bottom: 1rem;
+    border-bottom: 1px dashed var(--border);
+    padding-bottom: 0.5rem;
 }
 
 .skill-list {
@@ -260,7 +353,7 @@ h3 {
 }
 
 .skill-list i {
-    color: var(--primary);
+    color: var(--text);
 }
 
 .skill-list.tags {
@@ -270,18 +363,23 @@ h3 {
 }
 
 .skill-list.tags li {
-    background: var(--light);
+    background: transparent;
     padding: 0.3rem 0.8rem;
-    border-radius: 2rem;
-    border: 1px solid var(--gray);
+    border: 1px solid var(--border);
+    color: var(--text);
     margin: 0;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
 }
 
 .primary-lang {
     font-weight: 700;
-    color: var(--primary);
-    background: rgba(37,99,235,0.1);
-    border-color: var(--primary) !important;
+    background: rgba(51, 255, 51, 0.2) !important;
+    border-color: var(--accent) !important;
+    color: var(--accent) !important;
+    text-shadow: 0 0 5px var(--accent);
 }
 
 .tools {
@@ -289,11 +387,11 @@ h3 {
     flex-wrap: wrap;
     gap: 1rem;
     font-size: 2rem;
-    color: var(--secondary);
+    color: var(--text);
 }
 
 .tools i {
-    transition: var(--transition);
+    transition: all 0.3s ease;
     cursor: default;
 }
 
@@ -305,24 +403,30 @@ h3 {
 }
 
 .job-card {
-    background: var(--light);
-    border-radius: 1rem;
+    background: var(--bg);
+    border-left: 4px solid var(--border);
     padding: 1.5rem;
-    border-left: 4px solid var(--primary);
-    transition: var(--transition);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: inset 0 0 10px rgba(51, 255, 51, 0.05);
 }
 
 .job-card::before {
-    content: '';
+    content: "$>";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(37,99,235,0.05));
-    pointer-events: none;
+    top: 10px;
+    right: 10px;
+    color: var(--accent-dim);
+    opacity: 0.3;
+    font-size: 1rem;
+}
+
+.job-card:hover {
+    transform: translateX(10px);
+    box-shadow: 0 0 20px rgba(51, 255, 51, 0.3), inset 0 0 15px rgba(51, 255, 51, 0.1);
+    border-color: var(--accent);
 }
 
 .job-header {
@@ -334,12 +438,12 @@ h3 {
 }
 
 .job-date {
-    color: var(--secondary);
+    color: var(--text-dim);
     font-size: 0.9rem;
     font-weight: 500;
-    background: white;
+    background: var(--bg-light);
     padding: 0.2rem 0.8rem;
-    border-radius: 2rem;
+    border: 1px solid var(--border);
 }
 
 .job-company {
@@ -347,22 +451,25 @@ h3 {
 }
 
 .job-company a {
-    color: var(--primary);
+    color: var(--accent);
     text-decoration: none;
+    border-bottom: 1px dashed var(--accent);
 }
 
 .job-company a:hover {
-    text-decoration: underline;
+    color: var(--text-bright);
+    text-shadow: 0 0 5px var(--accent);
 }
 
 .job-description {
     margin-top: 0.5rem;
     line-height: 1.5;
+    color: var(--text);
 }
 
 .education {
-    border-left-color: var(--secondary);
-    background: #eef2ff;
+    border-left-color: var(--accent-dim);
+    background: #0f0f0f;
 }
 
 /* Кнопка наверх */
@@ -370,18 +477,21 @@ h3 {
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    background: var(--primary);
-    color: white;
+    background: var(--bg);
+    color: var(--text);
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    border: none;
+    border: 2px solid var(--border);
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
-    transition: var(--transition);
-    box-shadow: 0 5px 15px rgba(37,99,235,0.4);
+    transition: all 0.3s ease;
+    box-shadow: 0 0 15px var(--text-dim);
     z-index: 99;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .scroll-top.show {
@@ -390,7 +500,10 @@ h3 {
 }
 
 .scroll-top:hover {
-    background: var(--primary-dark);
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--accent);
+    box-shadow: 0 0 30px var(--text);
     transform: scale(1.1);
 }
 
@@ -410,21 +523,28 @@ h3 {
 @media (min-width: 769px) {
     .profile-img:hover {
         transform: scale(1.05);
-        box-shadow: 0 15px 30px rgba(37,99,235,0.4);
-        border-color: var(--primary-dark);
+        box-shadow: 0 0 30px var(--text);
+        border-color: var(--accent);
     }
 
     .job-card:hover {
         transform: translateX(10px) scale(1.01);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.15);
     }
 
     .tools i:hover {
         transform: scale(1.2) rotate(5deg);
+        color: var(--accent);
+        text-shadow: 0 0 15px var(--accent);
     }
 
     .links a:hover {
-        box-shadow: 0 5px 15px rgba(37,99,235,0.3);
+        box-shadow: 0 0 20px var(--text);
+    }
+
+    .skill-list.tags li:hover {
+        background: var(--text);
+        color: var(--bg);
+        border-color: var(--accent);
     }
 }
 
@@ -435,12 +555,12 @@ h3 {
         top: 70px;
         left: 0;
         width: 100%;
-        background: white;
+        background: var(--bg);
         flex-direction: column;
         align-items: center;
         padding: 2rem 0;
         gap: 1rem;
-        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        border-bottom: 2px solid var(--border);
         transform: translateY(-150%);
         transition: transform 0.3s ease;
         z-index: 999;
