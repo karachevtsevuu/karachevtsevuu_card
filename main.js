@@ -8,20 +8,18 @@ function calculateExperience() {
     document.getElementById('experience-year').textContent = experience;
 }
 
-// Копирование email с визуальным откликом (иконка меняется на галочку на 2 сек)
-function setupCopyButton() {
-    const copyBtn = document.getElementById('copyEmailBtn');
-    if (!copyBtn) return;
+// Универсальная функция копирования с визуальным откликом
+function setupCopyButton(buttonId, textToCopy) {
+    const btn = document.getElementById(buttonId);
+    if (!btn) return;
 
-    copyBtn.addEventListener('click', () => {
-        const email = 'karachevtsevuu@gmail.com';
-        const icon = copyBtn.querySelector('i');
+    btn.addEventListener('click', () => {
+        const icon = btn.querySelector('i');
 
-        // Копируем в буфер обмена
-        navigator.clipboard.writeText(email).catch(() => {
-            // fallback для старых браузеров
+        // Копирование
+        navigator.clipboard.writeText(textToCopy).catch(() => {
             const textarea = document.createElement('textarea');
-            textarea.value = email;
+            textarea.value = textToCopy;
             document.body.appendChild(textarea);
             textarea.select();
             document.execCommand('copy');
@@ -44,11 +42,24 @@ function setupCopyButton() {
     });
 }
 
+// Обработчик клика на логотип (nav-brand) — скролл наверх
+function setupBrandScroll() {
+    const brand = document.querySelector('.nav-brand');
+    if (brand) {
+        brand.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Закрыть мобильное меню, если открыто
+            document.getElementById('navMenu')?.classList.remove('active');
+        });
+    }
+}
+
 // Навигация (подсветка активного пункта)
 function setupNavHighlight() {
     const sections = document.querySelectorAll('.section');
     const navLinks = document.querySelectorAll('.nav-link');
-    
+
     window.addEventListener('scroll', () => {
         let current = '';
         sections.forEach(section => {
@@ -68,7 +79,7 @@ function setupNavHighlight() {
     });
 }
 
-// Плавный скролл при клике на навигацию
+// Плавный скролл при клике на пункты навигации
 function setupSmoothScroll() {
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -78,7 +89,7 @@ function setupSmoothScroll() {
             if (target) {
                 target.scrollIntoView({ behavior: 'smooth' });
                 // Закрыть мобильное меню
-                document.getElementById('navMenu').classList.remove('active');
+                document.getElementById('navMenu')?.classList.remove('active');
             }
         });
     });
@@ -100,7 +111,7 @@ function setupScrollTop() {
     });
 }
 
-// Анимация появления при скролле (Intersection Observer)
+// Анимация появления при скролле
 function setupFadeInOnScroll() {
     const faders = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver(entries => {
@@ -114,7 +125,7 @@ function setupFadeInOnScroll() {
     faders.forEach(fader => observer.observe(fader));
 }
 
-// Мобильное меню (бургер)
+// Мобильное меню
 function setupMobileMenu() {
     const toggler = document.getElementById('navToggler');
     const menu = document.getElementById('navMenu');
@@ -125,10 +136,12 @@ function setupMobileMenu() {
     }
 }
 
-// Инициализация всего при загрузке
+// Инициализация
 document.addEventListener('DOMContentLoaded', () => {
     calculateExperience();
-    setupCopyButton();
+    setupCopyButton('copyEmailBtn', 'karachevtsevuu@gmail.com');
+    setupCopyButton('copyTelegramBtn', '@grammidin');
+    setupBrandScroll();
     setupNavHighlight();
     setupSmoothScroll();
     setupScrollTop();

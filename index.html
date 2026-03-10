@@ -9,211 +9,211 @@
     <title>Карачевцев Ю.Ю.</title>
     <link rel="icon" type="image/x-icon" href="/img/favicon.webp" />
     <!-- Шрифты Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&display=swap" rel="stylesheet" />
     <!-- Font Awesome 5 (иконки) -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
     <!-- Наш CSS -->
     <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
-    <!-- Навигация -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#about" class="nav-brand">Карачевцев Юрий</a>
-            <button class="nav-toggler" id="navToggler" aria-label="Меню">
-                <span class="toggler-icon"></span>
-            </button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#about" class="nav-link">Обо мне</a></li>
-                <li><a href="#skills" class="nav-link">Навыки</a></li>
-                <li><a href="#experience" class="nav-link">Опыт</a></li>
+<!-- Навигация -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="nav-brand">Карачевцев Юрий</a>
+        <button class="nav-toggler" id="navToggler" aria-label="Меню">
+            <span class="toggler-icon"></span>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="#about" class="nav-link">Обо мне</a></li>
+            <li><a href="#skills" class="nav-link">Навыки</a></li>
+            <li><a href="#experience" class="nav-link">Опыт</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Основной контент -->
+<main class="container">
+    <!-- Секция "Обо мне" -->
+    <section id="about" class="section fade-in">
+        <div class="profile-header">
+            <img src="/img/profile.png" alt="Карачевцев Юрий" class="profile-img">
+            <div>
+                <h1>Карачевцев <span class="text-primary">Юрий</span></h1>
+                <p class="subtitle">Ведущий программист, опыт <span id="experience-year"></span> лет</p>
+                <p><i class="fas fa-map-marker-alt"></i> Рыбинск, Ярославская обл.</p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:karachevtsevuu@gmail.com">karachevtsevuu@gmail.com</a> <button class="copy-btn" id="copyEmailBtn" title="Копировать email"><i class="fas fa-copy"></i></button></p>
+                <p><i class="fab fa-telegram"></i> Telegram: <a href="https://t.me/grammidin" target="_blank">@grammidin</a> <button class="copy-btn" id="copyTelegramBtn" title="Копировать Telegram"><i class="fas fa-copy"></i></button></p>
+            </div>
+        </div>
+
+        <div class="about-text">
+            <p class="lead">Люблю свою работу. Разрабатываю быстро и качественно. Постоянно расту как специалист, изучаю что-то новое, держу руку на пульсе.</p>
+            <div id="aboutMore">
+                <p>Реагирую на аспекты рабочего процесса адекватно и позитивно. Главное – разработать удобный и качественный продукт, добиться поставленных целей, сделать пользователя счастливым. Всегда добиваюсь результата. К делу подхожу ответственно и скрупулёзно.</p>
+            </div>
+        </div>
+
+        <div class="links">
+            <h3>Ссылки на резюме</h3>
+            <ul>
+                <li style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="https://yaroslavl.hh.ru/resume/ff4eef08ff035dd8a80039ed1f4f7949763954" target="_blank"><i class="fas fa-briefcase"></i> HeadHunter (FrontEnd)</a>
+                    <a href="https://rybinsk.hh.ru/resume/24cf978fff0e283dae0039ed1f684166544444" target="_blank"><i class="fas fa-briefcase"></i> HeadHunter (FullStack)</a>
+                </li>
+                <li><a href="https://career.habr.com/grammidin" target="_blank"><i class="fas fa-briefcase"></i> Хабр Карьера</a></li>
+                <li><a href="https://www.rabota.ru/resume36373496.html" target="_blank"><i class="fas fa-briefcase"></i> Работа.ру</a></li>
             </ul>
         </div>
-    </nav>
+    </section>
 
-    <!-- Основной контент -->
-    <main class="container">
-        <!-- Секция "Обо мне" -->
-        <section id="about" class="section fade-in">
-            <div class="profile-header">
-                <img src="/img/profile.png" alt="Карачевцев Юрий" class="profile-img">
-                <div>
-                    <h1>Карачевцев <span class="text-primary">Юрий</span></h1>
-                    <p class="subtitle">Ведущий программист, опыт <span id="experience-year"></span> лет</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Рыбинск, Ярославская обл.</p>
-                    <p><i class="fas fa-envelope"></i> <a href="mailto:karachevtsevuu@gmail.com">karachevtsevuu@gmail.com</a> <button class="copy-btn" id="copyEmailBtn" title="Копировать email"><i class="fas fa-copy"></i></button></p>
-                    <p><i class="fab fa-telegram"></i> Telegram: <a href="https://t.me/grammidin" target="_blank">@grammidin</a></p>
-                </div>
-            </div>
-
-            <div class="about-text">
-                <p class="lead">Люблю свою работу. Разрабатываю быстро и качественно. Постоянно расту как специалист, изучаю что-то новое, держу руку на пульсе.</p>
-                <div id="aboutMore">
-                    <p>Реагирую на аспекты рабочего процесса адекватно и позитивно. Главное – разработать удобный и качественный продукт, добиться поставленных целей, сделать пользователя счастливым. Всегда добиваюсь результата. К делу подхожу ответственно и скрупулёзно.</p>
-                </div>
-            </div>
-
-            <div class="links">
-                <h3>Ссылки на резюме</h3>
-                <ul>
-                    <li style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <a href="https://yaroslavl.hh.ru/resume/ff4eef08ff035dd8a80039ed1f4f7949763954" target="_blank"><i class="fas fa-briefcase"></i> HeadHunter (FrontEnd)</a>
-                        <a href="https://rybinsk.hh.ru/resume/24cf978fff0e283dae0039ed1f684166544444" target="_blank"><i class="fas fa-briefcase"></i> HeadHunter (FullStack)</a>
-                    </li>
-                    <li><a href="https://career.habr.com/grammidin" target="_blank"><i class="fas fa-briefcase"></i> Хабр Карьера</a></li>
-                    <li><a href="https://www.rabota.ru/resume36373496.html" target="_blank"><i class="fas fa-briefcase"></i> Работа.ру</a></li>
+    <!-- Секция "Навыки" -->
+    <section id="skills" class="section fade-in">
+        <h2>Навыки</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>FrontEnd</h3>
+                <ul class="skill-list tags">
+                    <li class="primary-lang">JavaScript</li>
+                    <li class="primary-lang">TypeScript</li>
+                    <li class="primary-lang">React</li>
+                    <li class="primary-lang">Vue.js</li>
+                    <li class="primary-lang">Next.js</li>
+                    <li>Angular</li>
+                    <li>Backbone</li>
+                    <li>HTML5</li>
+                    <li>CSS</li>
+                    <li>SASS/SCSS</li>
+                    <li>tailwind CSS</li>
+                    <li>Zustand</li>
+                    <li>Redux</li>
+                    <li>React Native</li>
+                    <li>MobX</li>
+                    <li>Git</li>
+                    <li>REST API</li>
                 </ul>
             </div>
-        </section>
-
-        <!-- Секция "Навыки" -->
-        <section id="skills" class="section fade-in">
-            <h2>Навыки</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>FrontEnd</h3>
-                    <ul class="skill-list tags">
-                        <li class="primary-lang">JavaScript</li>
-                        <li class="primary-lang">TypeScript</li>
-                        <li class="primary-lang">React</li>
-                        <li class="primary-lang">Vue.js</li>
-                        <li class="primary-lang">Next.js</li>
-                        <li>Angular</li>
-                        <li>Backbone</li>
-                        <li>HTML5</li>
-                        <li>CSS</li>
-                        <li>SASS/SCSS</li>
-                        <li>tailwind CSS</li>
-                        <li>Zustand</li>
-                        <li>Redux</li>
-                        <li>React Native</li>
-                        <li>MobX</li>
-                        <li>Git</li>
-                        <li>REST API</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>BackEnd</h3>
-                    <ul class="skill-list tags">
-                        <li class="primary-lang">JavaScript</li>
-                        <li class="primary-lang">TypeScript</li>
-                        <li class="primary-lang">Java</li>
-                        <li class="primary-lang">PHP</li>
-                        <li class="primary-lang">Nuxt</li>
-                        <li class="primary-lang">Node.js</li>
-                        <li>Python</li>
-                        <li>SQL</li>
-                        <li>PostgreSQL</li>
-                        <li>Git</li>
-                        <li>REST</li>
-                        <li>JSON</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Разработка приложений</h3>
-                    <ul class="skill-list tags">
-                        <li class="primary-lang">React Native</li>
-                        <li class="primary-lang">C++</li>
-                        <li class="primary-lang">Java</li>
-                        <li>Python</li>
-                    </ul>
-                </div>
+            <div class="skill-category">
+                <h3>BackEnd</h3>
+                <ul class="skill-list tags">
+                    <li class="primary-lang">JavaScript</li>
+                    <li class="primary-lang">TypeScript</li>
+                    <li class="primary-lang">Java</li>
+                    <li class="primary-lang">PHP</li>
+                    <li class="primary-lang">Nuxt</li>
+                    <li class="primary-lang">Node.js</li>
+                    <li>Python</li>
+                    <li>SQL</li>
+                    <li>PostgreSQL</li>
+                    <li>Git</li>
+                    <li>REST</li>
+                    <li>JSON</li>
+                </ul>
             </div>
-        </section>
-
-        <!-- Секция "Опыт работы" -->
-        <section id="experience" class="section fade-in">
-            <h2>Опыт работы</h2>
-            <div class="timeline">
-                <!-- IBS -->
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>IBS</h3>
-                        <span class="job-date">Декабрь 2024 — настоящее время</span>
-                    </div>
-                    <div class="job-company"><a href="https://ibs.ru/" target="_blank">ibs.ru</a></div>
-                    <p class="job-description">Ведущий программист. Проект в финансовом секторе. Разработка веб-приложений, управление группой разработки.</p>
-                    <p class="job-description">- Разработка высоконагруженных веб-приложений для банковского казначейства с использованием современного стека: TypeScript, React.js, Vite</p>
-                    <p class="job-description">- Создание и масштабирование приложения с нуля: проектирование архитектуры, реализация модулей, оптимизация производительности при обработке больших объёмов данных</p>
-                    <p class="job-description">- Работа с сложными моделями данных. Например, аналитика на основе данных OLAP-кубов. Динамические отчеты, с настраиваемыми фильтрами, группировкой, набором столбцов. Тонкая настройка графиков и данных для их построения, настройка интерактивности и адаптивности под требования бизнеса.</p>
-                    <p class="job-description">- Создание конструктора отчета по произвольным данным (по аналогии с отчетами SuperSet)</p>
-                    <p class="job-description">- Работа с большим объемом входящих данных, оптимизация API и подходов работы между фронтом и бэком.</p>
-                    <p class="job-description">- Создание универсального UI Kit с темизацией</p>
-                    <p class="job-description">- Взаимодействие с командой аналитиков и бэкенд-разработчиков в рамках банковского регуляторного окружения. Взаимодействие со смежными командами.</p>
-                    <p class="job-description">Создали приложение с нуля и довели до продаж.</p>
-                    <p class="job-description">Основной стек: Язык: TypeScript, JavaScript, React, HTML, CSS, SASS. Тестирование компонентов, написание Unit-Тестов на Jest. Стейт-менеджеры: Redux, Zustand. Опыт работы с Axios, Webpack, git, npm, Docker.</p>
-                    <p class="job-description">Результаты: 
-                        <div>- Успешный запуск приложения для казначейства, обеспечившего автоматизацию ключевых процессов анализа рисков и ликвидности. </div>
-                        <div>- Повышение удобства работы пользователей за счёт интуитивного интерфейса и высокой скорости отклика системы.</div>
-                    </p>
-                </div>
-
-                <!-- Иннотех -->
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>Иннотех</h3>
-                        <span class="job-date">Апрель 2022 — Ноябрь 2024</span>
-                    </div>
-                    <div class="job-company"><a href="https://inno.tech/ru/" target="_blank">inno.tech</a></div>
-                    <p class="job-description">ИТ-компания, разрабатывающая инновационные решения для цифровизации бизнеса. Эксперт-разработчик, Teamlead. Разработка веб-приложений, управление группой разработки. TypeScript, JavaScript, React.js, Vue.js, HTML, CSS, SASS.</p>
-                </div>
-
-                <!-- EPAM Systems -->
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>EPAM Systems</h3>
-                        <span class="job-date">Декабрь 2020 — апрель 2022</span>
-                    </div>
-                    <div class="job-company"><a href="https://www.epam-group.ru" target="_blank">www.epam-group.ru</a></div>
-                    <p class="job-description">Крупнейший мировой производитель заказного ПО. Senior Front-end Software Engineer, Teamlead. Разработка веб-приложений, управление группой разработки. TypeScript, JavaScript, React.js, Vue.js, HTML, CSS, SASS.</p>
-                </div>
-
-                <!-- Тензор -->
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>Тензор, ООО</h3>
-                        <span class="job-date">Апрель 2011 — декабрь 2020</span>
-                    </div>
-                    <div class="job-company"><a href="http://www.tensor.ru" target="_blank">www.tensor.ru</a></div>
-                    <p class="job-description">Информационные технологии. Разработка JS-фреймворка, backend/frontend веб-приложений. Управление проектами, документооборот. TypeScript, JavaScript, HTML, CSS, less, C++, python, SQL, PostgreSQL.</p>
-                </div>
-
-                <!-- ОДК -->
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>ОДК (Объединенная двигателестроительная корпорация)</h3>
-                        <span class="job-date">Апрель 2008 — апрель 2011</span>
-                    </div>
-                    <div class="job-company"><a href="http://www.uecrus.com/rus/" target="_blank">www.uecrus.com</a></div>
-                    <p class="job-description">Промышленное оборудование. Разработка приложений для документооборота, согласования, САПР. Java, C++, Oracle.</p>
-                </div>
-
-                <!-- НПФ Старт -->
-                <div class="job-card">
-                    <div class="job-header">
-                        <h3>НПФ Старт</h3>
-                        <span class="job-date">Июль 2006 — апрель 2008</span>
-                    </div>
-                    <div class="job-company"><a href="http://www.npfstart.ru" target="_blank">www.npfstart.ru</a></div>
-                    <p class="job-description">Изделия спецназначения. Программирование С++, ПЛИС, разработка печатных плат, конструкторских чертежей.</p>
-                </div>
-
-                <!-- Университет -->
-                <div class="job-card education">
-                    <div class="job-header">
-                        <h3>Рыбинский государственный авиационный технический университет</h3>
-                        <span class="job-date">2001 — 2006</span>
-                    </div>
-                    <p>Факультет Электротехники и электроники</p>
-                </div>
+            <div class="skill-category">
+                <h3>Разработка приложений</h3>
+                <ul class="skill-list tags">
+                    <li>React Native</li>
+                    <li>C++</li>
+                    <li>Java</li>
+                    <li>Python</li>
+                </ul>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <!-- Кнопка наверх -->
-    <button id="scrollTop" class="scroll-top" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+    <!-- Секция "Опыт работы" -->
+    <section id="experience" class="section fade-in">
+        <h2>Опыт работы</h2>
+        <div class="timeline">
+            <!-- IBS -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>IBS</h3>
+                    <span class="job-date">Декабрь 2024 — настоящее время</span>
+                </div>
+                <div class="job-company"><a href="https://ibs.ru/" target="_blank">ibs.ru</a></div>
+                <p class="job-description">Ведущий программист. Проект в финансовом секторе. Разработка веб-приложений, управление группой разработки.</p>
+                <p class="job-description">- Разработка высоконагруженных веб-приложений для банковского казначейства с использованием современного стека: TypeScript, React.js, Vite</p>
+                <p class="job-description">- Создание и масштабирование приложения с нуля: проектирование архитектуры, реализация модулей, оптимизация производительности при обработке больших объёмов данных</p>
+                <p class="job-description">- Работа с сложными моделями данных. Например, аналитика на основе данных OLAP-кубов. Динамические отчеты, с настраиваемыми фильтрами, группировкой, набором столбцов. Тонкая настройка графиков и данных для их построения, настройка интерактивности и адаптивности под требования бизнеса.</p>
+                <p class="job-description">- Создание конструктора отчета по произвольным данным (по аналогии с отчетами SuperSet)</p>
+                <p class="job-description">- Работа с большим объемом входящих данных, оптимизация API и подходов работы между фронтом и бэком.</p>
+                <p class="job-description">- Создание универсального UI Kit с темизацией</p>
+                <p class="job-description">- Взаимодействие с командой аналитиков и бэкенд-разработчиков в рамках банковского регуляторного окружения. Взаимодействие со смежными командами.</p>
+                <p class="job-description">Создали приложение с нуля и довели до продаж.</p>
+                <p class="job-description">Основной стек: Язык: TypeScript, JavaScript, React, HTML, CSS, SASS. Тестирование компонентов, написание Unit-Тестов на Jest. Стейт-менеджеры: Redux, Zustand. Опыт работы с Axios, Webpack, git, npm, Docker.</p>
+                <p class="job-description">Результаты:
+                    <div>- Успешный запуск приложения для казначейства, обеспечившего автоматизацию ключевых процессов анализа рисков и ликвидности.</div>
+                    <div>- Повышение удобства работы пользователей за счёт интуитивного интерфейса и высокой скорости отклика системы.</div>
+                </p>
+            </div>
 
-    <!-- Подключаем основной скрипт -->
-    <script type="module" src="/main.js"></script>
+            <!-- Иннотех -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>Иннотех</h3>
+                    <span class="job-date">Апрель 2022 — Ноябрь 2024</span>
+                </div>
+                <div class="job-company"><a href="https://inno.tech/ru/" target="_blank">inno.tech</a></div>
+                <p class="job-description">ИТ-компания, разрабатывающая инновационные решения для цифровизации бизнеса. Эксперт-разработчик, Teamlead. Разработка веб-приложений, управление группой разработки. TypeScript, JavaScript, React.js, Vue.js, HTML, CSS, SASS.</p>
+            </div>
+
+            <!-- EPAM Systems -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>EPAM Systems</h3>
+                    <span class="job-date">Декабрь 2020 — апрель 2022</span>
+                </div>
+                <div class="job-company"><a href="https://www.epam-group.ru" target="_blank">www.epam-group.ru</a></div>
+                <p class="job-description">Крупнейший мировой производитель заказного ПО. Senior Front-end Software Engineer, Teamlead. Разработка веб-приложений, управление группой разработки. TypeScript, JavaScript, React.js, Vue.js, HTML, CSS, SASS.</p>
+            </div>
+
+            <!-- Тензор -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>Тензор, ООО</h3>
+                    <span class="job-date">Апрель 2011 — декабрь 2020</span>
+                </div>
+                <div class="job-company"><a href="http://www.tensor.ru" target="_blank">www.tensor.ru</a></div>
+                <p class="job-description">Информационные технологии. Разработка JS-фреймворка, backend/frontend веб-приложений. Управление проектами, документооборот. TypeScript, JavaScript, HTML, CSS, less, C++, python, SQL, PostgreSQL.</p>
+            </div>
+
+            <!-- ОДК -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>ОДК (Объединенная двигателестроительная корпорация)</h3>
+                    <span class="job-date">Апрель 2008 — апрель 2011</span>
+                </div>
+                <div class="job-company"><a href="http://www.uecrus.com/rus/" target="_blank">www.uecrus.com</a></div>
+                <p class="job-description">Промышленное оборудование. Разработка приложений для документооборота, согласования, САПР. Java, C++, Oracle.</p>
+            </div>
+
+            <!-- НПФ Старт -->
+            <div class="job-card">
+                <div class="job-header">
+                    <h3>НПФ Старт</h3>
+                    <span class="job-date">Июль 2006 — апрель 2008</span>
+                </div>
+                <div class="job-company"><a href="http://www.npfstart.ru" target="_blank">www.npfstart.ru</a></div>
+                <p class="job-description">Изделия спецназначения. Программирование С++, ПЛИС, разработка печатных плат, конструкторских чертежей.</p>
+            </div>
+
+            <!-- Университет -->
+            <div class="job-card education">
+                <div class="job-header">
+                    <h3>Рыбинский государственный авиационный технический университет</h3>
+                    <span class="job-date">2001 — 2006</span>
+                </div>
+                <p>Факультет Электротехники и электроники</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Кнопка наверх -->
+<button id="scrollTop" class="scroll-top" title="Наверх"><i class="fas fa-arrow-up"></i></button>
+
+<!-- Подключаем основной скрипт -->
+<script type="module" src="/main.js"></script>
 </body>
 </html>
