@@ -16,23 +16,40 @@ function setupCopyButton(buttonId, textToCopy) {
     btn.addEventListener('click', () => {
         const icon = btn.querySelector('i');
 
-        // Копирование
-        navigator.clipboard.writeText(textToCopy).catch(() => {
+        // Основная функция копирования с проверкой API
+        const copy = () => {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                // Пробуем современный API
+                navigator.clipboard.writeText(textToCopy).catch(fallbackCopy);
+            } else {
+                // Если API нет, сразу fallback
+                fallbackCopy();
+            }
+        };
+
+        // Запасной метод через textarea
+        const fallbackCopy = () => {
             const textarea = document.createElement('textarea');
             textarea.value = textToCopy;
+            textarea.style.position = 'fixed'; // чтобы не прокручивать страницу
             document.body.appendChild(textarea);
             textarea.select();
-            document.execCommand('copy');
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Не удалось скопировать:', err);
+            }
             document.body.removeChild(textarea);
-        });
+        };
 
-        // Меняем иконку на fa-check
+        copy();
+
+        // Визуальный отклик (смена иконки)
         if (icon) {
             icon.classList.remove('fa-copy');
             icon.classList.add('fa-check');
         }
 
-        // Через 2 секунды возвращаем исходную иконку
         setTimeout(() => {
             if (icon) {
                 icon.classList.remove('fa-check');
@@ -41,7 +58,6 @@ function setupCopyButton(buttonId, textToCopy) {
         }, 2000);
     });
 }
-
 // Обработчик клика на логотип (nav-brand) — скролл наверх
 function setupBrandScroll() {
     const brand = document.querySelector('.nav-brand');
