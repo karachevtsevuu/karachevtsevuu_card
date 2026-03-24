@@ -5,7 +5,7 @@ function calculateExperience() {
     const startYear = 2006;
     const currentYear = new Date().getFullYear();
     const experience = currentYear - startYear;
-    document.getElementById('experience-year').textContent = experience;
+    document.getElementById('experience-year').textContent = String(experience);
 }
 
 // Универсальная функция копирования с визуальным откликом

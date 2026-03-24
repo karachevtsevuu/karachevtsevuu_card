@@ -639,4 +639,9 @@ h3 {
     .copy-btn {
         display: none;
     }
+
+    .fade-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

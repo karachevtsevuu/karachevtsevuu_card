@@ -1,3 +1,2 @@
-# karachevtsevuu_card
-Мой сайт-резюме
+# Мой сайт-резюме
 Располагается по адресу: http://karachevtsevuu.ru/
