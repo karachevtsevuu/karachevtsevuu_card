@@ -310,6 +310,13 @@ h3 {
 }
 
 /* Ссылки на резюме */
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 .links ul {
     list-style: none;
     display: flex;
@@ -627,5 +634,9 @@ h3 {
         display: block;
         text-align: center;
         width: 100%;
+    }
+
+    .copy-btn {
+        display: none;
     }
 }
